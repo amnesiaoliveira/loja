@@ -1,0 +1,45 @@
+<%- include('partials/_header') %>
+
+<div class="container">
+    <div class="col-md-12 mb-3">
+        <div class="car-header bg-primary text-white">
+            <h4 class="mb-0">Lista de Jogos PS5</h4>
+        </div>
+    </div>
+    <div class="card-body">
+        <a href="/add" class="btn btn-success mb-3">Adicionar Novo Jogo</a>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Categoria</th>
+                    <th>Imagem</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (games && games.length > 0) { %>
+                    <% games.forEach(function(game) { %>
+                        <tr>
+                            <td><%= game.title %></td>
+                            <td><%= game.category %></td>
+                            <td><img src="/uploads/<%= game.image %>" alt="<%= game.title %>" width="100"></td>
+                            <td>
+                                <a href="/edit/<%= game._id %>" class="btn btn-warning btn-sm">Editar</a>
+                                <form action="/delete/<%= game._id %>" method="POST" style="display:inline;">
+                                    <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <% }); %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="4" class="text-center">Nenhum jogo cadastrado.</td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<%- include('partials/_footer') %>

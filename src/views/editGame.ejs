@@ -1,0 +1,37 @@
+<%- include('partials/_header') %>
+
+<div class="container">
+    <div class="col-md-12 mb-3">
+        <div class="car-header bg-primary text-white">
+            <h4 class="mb-0">Editar Jogo</h4>
+        </div>
+    </div>
+    <div class="card-body">
+        <form action="/games/<%= game._id %>?_method=PUT" method="POST" enctype="multipart/form-data" class="row g-3">
+            <!-- Título -->
+            <div class="col-md-6">
+                <input type="text" name="title" class="form-control" placeholder="Título do Jogo" value="<%= game.title %>" required autofocus>
+            </div>
+            <!-- Categoria -->
+            <div class="col-md-6">
+                <input type="text" name="category" class="form-control" placeholder="Categoria" value="<%= game.category %>" required>
+            </div>
+            <!-- Imagem -->
+            <div class="col-md-6">
+                <input type="file" name="image" class="form-control">
+                <small class="form-text text-muted">Deixe em branco para manter a imagem atual.</small>
+            </div>
+            <div class="col-md-6">
+                <% if (game.image) { %>
+                    <img src="/uploads/<%= game.image %>" alt="<%= game.title %>" class="img-thumbnail" style="max-width: 200px;">
+                <% } %>
+            </div>
+            <!-- Botão -->
+            <div class="col-md-1">
+                <button type="submit" class="btn btn-primary">Salvar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<%- include('partials/_footer') %>
